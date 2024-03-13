@@ -7,8 +7,40 @@ import { useState } from "react";
 
 import Tree from "~/components/Tree";
 
-export default function TreeNode({ node, key }: {
-  node: GroupNode, key: string
+// Note: cannot compose dynamic classes with string interpolation, Tailwind would break, so we have to
+// point to static strings. We got 25 depth levels only
+const depthMarginList = [
+  "pl-0",
+  "pl-4",
+  "pl-8",
+  "pl-12",
+  "pl-16",
+  "pl-20",
+  "pl-24",
+  "pl-28",
+  "pl-32",
+  "pl-36",
+  "pl-40",
+  "pl-44",
+  "pl-48",
+  "pl-52",
+  "pl-56",
+  "pl-60",
+  "pl-64",
+  "pl-[17rem]", // there's no "pl-70"
+  "pl-72",
+  "pl-[19rem]", // there's no "pl-76"
+  "pl-80",
+  "pl-[21rem]", // there's no "pl-84"
+  "pl-[22rem]", // there's no "pl-88"
+  "pl-[23rem]", // there's no "pl-92"
+  "pl-96",
+]
+
+export default function TreeNode({ node, key, depth = 0 }: {
+  node: GroupNode,
+  key: string,
+  depth: number
   }) {
   const { children, label } = node;
 
@@ -20,8 +52,8 @@ export default function TreeNode({ node, key }: {
 
   return (
     <>
-      <li>
-        <button onClick={toggleChildren} id={key} className="flex justify-center items-center p-2 rounded-md hover:bg-slate-200 focus:bg-slate-400">
+      <li className={depthMarginList[depth]}>
+        <button onClick={toggleChildren} id={key} className="flex justify-center items-center list-none p-2 rounded-md hover:bg-slate-200 focus:bg-slate-400">
           {children?.length ? (
             showChildren ? (
               <RiArrowDownDoubleLine className="join-item pr-1" />
@@ -35,10 +67,8 @@ export default function TreeNode({ node, key }: {
             <span className="join-item">{label}</span>
         </button>
       </li>
-      {children?.length ? (
-        <ul>
-          {showChildren && <Tree treeData={children} />}
-        </ul>
+      {children?.length && showChildren ? (
+        <Tree treeData={children} depth={depth + 1} />
       ) : null}
     </>
   );
