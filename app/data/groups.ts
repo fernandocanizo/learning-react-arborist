@@ -35,11 +35,43 @@ export const groupData: GroupTree = [
       },
       {
         key: "2",
-        label: "Edificio Las Vegas",
+        label: "Empresa A",
         children: [
           {
             key: "2-0",
-            label: "Depto 101",
+            label: "Empresa B",
+            children: [
+              {
+                key: "2-0-0",
+                label: "Empresa C",
+                children: [
+                  {
+                    key: "2-0-0-0",
+                    label: "Empresa D",
+                    children: [
+                      {
+                        key: "2-0-0-0-1",
+                        label: "Barrio Las Palometas",
+                        children: [
+                          {
+                            key: "2-0-0-0-1-1",
+                            label: "Casa 01",
+                          },
+                          {
+                            key: "2-0-0-0-1-2",
+                            label: "Casa 02",
+                          },
+                          {
+                            key: "2-0-0-0-1-3",
+                            label: "Casa 03",
+                          },
+                       ],
+                      },
+                    ],
+                  }
+                ],
+              },
+            ],
           },
           {
             key: "2-1",
