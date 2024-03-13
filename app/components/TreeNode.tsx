@@ -1,3 +1,6 @@
+import { RiArrowRightDoubleLine, RiArrowDownDoubleLine } from "react-icons/ri";
+import { BsHouse } from "react-icons/bs";
+
 import type { GroupNode } from "~/types"
 
 import { useState } from "react";
@@ -11,15 +14,27 @@ export default function TreeNode({ node, key }: {
 
   const [showChildren, setShowChildren] = useState(false);
 
-  const handleClick = () => {
+  const toggleChildren = () => {
     setShowChildren(!showChildren);
   };
 
   return (
     <>
-      <button onClick={handleClick} id={key}>
-        {label}
-      </button>
+      <li>
+        <button onClick={toggleChildren} id={key} className="flex justify-center items-center p-2 rounded-md hover:bg-slate-200 focus:bg-slate-400">
+          {children?.length ? (
+            showChildren ? (
+              <RiArrowDownDoubleLine className="join-item pr-1" />
+            ) : (
+              <RiArrowRightDoubleLine className="join-item pr-1" />
+            )
+          ) : (
+            <BsHouse className="join-item pr-1" />
+          )
+          }
+            <span className="join-item">{label}</span>
+        </button>
+      </li>
       {children?.length ? (
         <ul>
           {showChildren && <Tree treeData={children} />}
