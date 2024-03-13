@@ -1,4 +1,8 @@
-import { RiArrowRightDoubleLine, RiArrowDownDoubleLine } from "react-icons/ri";
+import {
+  RiArrowRightDoubleLine,
+  RiArrowDownDoubleLine,
+  RiCornerDownRightLine,
+} from "react-icons/ri";
 import { BsHouse } from "react-icons/bs";
 
 import type { GroupNode } from "~/types"
@@ -53,7 +57,11 @@ export default function TreeNode({ node, key, depth = 0 }: {
   return (
     <>
       <li className={depthMarginList[depth]}>
-        <button onClick={toggleChildren} id={key} className="flex justify-center items-center list-none p-2 rounded-md hover:bg-slate-200 focus:bg-slate-400">
+        <button onDoubleClick={toggleChildren} id={key} className="join flex justify-center items-center list-none p-2 rounded-md hover:bg-slate-200 focus:bg-slate-400">
+          {depth !== 0 ? (
+            <RiCornerDownRightLine className="join-item pr-1" />
+          ) : null
+          }
           {children?.length ? (
             showChildren ? (
               <RiArrowDownDoubleLine className="join-item pr-1" />
